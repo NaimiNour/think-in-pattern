@@ -11,9 +11,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inject Claude API Key
+      - name: Build Docker image
+        run: docker build -t think-in-pattern .
+
+      - name: Inject Groq API Key
         run: |
-          sed -i "s|__CLAUDE_KEY__|${{ secrets.CLAUDE_API_KEY }}|g" app.js
+          sed -i "s|__GROQ_KEY__|${{ secrets.GROQ_API_KEY }}|g" app.js
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
