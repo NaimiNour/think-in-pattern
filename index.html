@@ -1,93 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Think in Pattern</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Think in Pattern</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- HERO -->
+    <header class="hero">
+      <nav>
+        <span class="logo">Think in Pattern</span>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#ebook" class="cta-btn">Get the eBook</a>
+      </nav>
+      <div class="hero-content">
+        <h1>Master Algorithmic Patterns</h1>
+        <p>
+          Stop memorizing solutions. Start recognizing patterns.<br />
+          The eBook for students and developers preparing for coding interviews.
+        </p>
+        <a href="#ebook" class="cta-btn large">Get the eBook →</a>
+      </div>
+    </header>
 
-<!-- HERO -->
-<header class="hero">
-  <nav>
-    <span class="logo">Think in Pattern</span>
-    <a href="#features" class="nav-link">Features</a>
-    <a href="#ebook" class="cta-btn">Get the eBook</a>
-  </nav>
-  <div class="hero-content">
-    <h1>Master Algorithmic Patterns</h1>
-    <p>Stop memorizing solutions. Start recognizing patterns.<br/>
-    The eBook for students and developers preparing for coding interviews.</p>
-    <a href="#ebook" class="cta-btn large">Get the eBook →</a>
-  </div>
-</header>
+    <!-- AI FEATURES -->
+    <section id="features" class="features">
+      <h2>AI-Powered Learning Tools</h2>
+      <p class="subtitle">Powered by Claude AI — ask, practice, discover.</p>
 
-<!-- AI FEATURES -->
-<section id="features" class="features">
-  <h2>AI-Powered Learning Tools</h2>
-  <p class="subtitle">Powered by Claude AI — ask, practice, discover.</p>
+      <div class="feature-tabs">
+        <button class="ftab active" onclick="showFeature('recommender')">
+          🎯 Pattern Recommender
+        </button>
+        <button class="ftab" onclick="showFeature('exercise')">
+          🧩 Exercise Generator
+        </button>
+        <button class="ftab" onclick="showFeature('chatbot')">
+          💬 Ask the Book
+        </button>
+      </div>
 
-  <div class="feature-tabs">
-    <button class="ftab active" onclick="showFeature('recommender')">🎯 Pattern Recommender</button>
-    <button class="ftab" onclick="showFeature('exercise')">🧩 Exercise Generator</button>
-    <button class="ftab" onclick="showFeature('chatbot')">💬 Ask the Book</button>
-  </div>
+      <!-- Feature 1 : Recommender -->
+      <div class="feature-panel active" id="feat-recommender">
+        <p class="feat-desc">
+          Describe your problem and get the right pattern.
+        </p>
+        <textarea
+          id="rec-input"
+          placeholder="e.g. I need to find the longest substring without repeating characters..."
+        ></textarea>
+        <button class="ai-btn" onclick="runRecommender()">
+          Recommend a Pattern
+        </button>
+        <div class="ai-output" id="rec-output"></div>
+      </div>
 
-  <!-- Feature 1 : Recommender -->
-  <div class="feature-panel active" id="feat-recommender">
-    <p class="feat-desc">Describe your problem and get the right pattern.</p>
-    <textarea id="rec-input" placeholder="e.g. I need to find the longest substring without repeating characters..."></textarea>
-    <button class="ai-btn" onclick="runRecommender()">Recommend a Pattern</button>
-    <div class="ai-output" id="rec-output"></div>
-  </div>
+      <!-- Feature 2 : Exercise Generator -->
+      <div class="feature-panel" id="feat-exercise">
+        <p class="feat-desc">
+          Choose a pattern and level to get a fresh coding exercise.
+        </p>
+        <div class="selectors">
+          <select id="pattern-select">
+            <option>Sliding Window</option>
+            <option>Two Pointers</option>
+            <option>BFS / DFS</option>
+            <option>Dynamic Programming</option>
+            <option>Binary Search</option>
+            <option>Backtracking</option>
+            <option>Heap / Priority Queue</option>
+          </select>
+          <select id="level-select">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+        <button class="ai-btn" onclick="runExercise()">
+          Generate Exercise
+        </button>
+        <div class="ai-output" id="ex-output"></div>
+      </div>
 
-  <!-- Feature 2 : Exercise Generator -->
-  <div class="feature-panel" id="feat-exercise">
-    <p class="feat-desc">Choose a pattern and level to get a fresh coding exercise.</p>
-    <div class="selectors">
-      <select id="pattern-select">
-        <option>Sliding Window</option>
-        <option>Two Pointers</option>
-        <option>BFS / DFS</option>
-        <option>Dynamic Programming</option>
-        <option>Binary Search</option>
-        <option>Backtracking</option>
-        <option>Heap / Priority Queue</option>
-      </select>
-      <select id="level-select">
-        <option>Beginner</option>
-        <option>Intermediate</option>
-        <option>Advanced</option>
-      </select>
-    </div>
-    <button class="ai-btn" onclick="runExercise()">Generate Exercise</button>
-    <div class="ai-output" id="ex-output"></div>
-  </div>
+      <!-- Feature 3 : Chatbot -->
+      <div class="feature-panel" id="feat-chatbot">
+        <p class="feat-desc">
+          Ask anything about the patterns covered in the eBook.
+        </p>
+        <div class="chat-history" id="chat-history"></div>
+        <div class="chat-input-row">
+          <input
+            id="chat-input"
+            type="text"
+            placeholder="e.g. When should I use BFS vs DFS?"
+          />
+          <button class="ai-btn small" onclick="runChat()">Send</button>
+        </div>
+      </div>
+    </section>
 
-  <!-- Feature 3 : Chatbot -->
-  <div class="feature-panel" id="feat-chatbot">
-    <p class="feat-desc">Ask anything about the patterns covered in the eBook.</p>
-    <div class="chat-history" id="chat-history"></div>
-    <div class="chat-input-row">
-      <input id="chat-input" type="text" placeholder="e.g. When should I use BFS vs DFS?" />
-      <button class="ai-btn small" onclick="runChat()">Send</button>
-    </div>
-  </div>
-</section>
+    <!-- EBOOK CTA -->
+    <section id="ebook" class="ebook-cta">
+      <h2>Get Think in Pattern</h2>
+      <p>
+        A structured guide to the most common algorithmic patterns —<br />
+        with examples, exercises, and interview tips.
+      </p>
+      <a
+        href="mailto:your@email.com?subject=Think in Pattern eBook"
+        class="cta-btn large"
+        >Request the eBook →</a
+      >
+    </section>
 
-<!-- EBOOK CTA -->
-<section id="ebook" class="ebook-cta">
-  <h2>Get Think in Pattern</h2>
-  <p>A structured guide to the most common algorithmic patterns —<br/>
-  with examples, exercises, and interview tips.</p>
-  <a href="mailto:your@email.com?subject=Think in Pattern eBook" class="cta-btn large">Request the eBook →</a>
-</section>
+    <footer>
+      <p>
+        Made by <strong>Nourelhouda Naimi</strong> ·
+        <a href="https://linkedin.com/in/nourelhouda-naimi-361894125"
+          >LinkedIn</a
+        >
+      </p>
+    </footer>
 
-<footer>
-  <p>Made by <strong>Nourelhouda Naimi</strong> · <a href="https://linkedin.com/in/nourelhouda-naimi-361894125">LinkedIn</a></p>
-</footer>
-
-<script type="module" src="app.js"></script>
-</body>
+    <script src="config.js"></script>
+    <script type="module" src="app.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
 </html>

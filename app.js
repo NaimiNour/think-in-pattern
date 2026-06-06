@@ -4,7 +4,7 @@ import {
   RECOMMENDER_PROMPT,
 } from "./prompts.js";
 
-const API_KEY = "__GROQ_KEY__"; // injectée via GitHub Actions
+const API_KEY = window.GROQ_API_KEY || "";
 const MODEL = "llama-3.3-70b-versatile"; // modèle gratuit Groq
 const chatHistory = [];
 
