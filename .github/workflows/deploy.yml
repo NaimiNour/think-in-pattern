@@ -16,9 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t think-in-pattern .
-
       - name: Create config file
         run: |
           echo "window.GROQ_API_KEY = '${{ secrets.GROQ_API_KEY }}';" > config.js
